@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TB_Quest_Game.Models
+namespace TB_Quest_Game
 {
-    class Person
+    public class Person
     {
         #region [ ENUMERATION ]
 
@@ -31,7 +31,6 @@ namespace TB_Quest_Game.Models
         private string _name;
         private Races _race;
         private Genders _gender;
-        private bool _appearsFriendly;
         private int[] _currentRoom;
 
         #endregion
@@ -53,12 +52,6 @@ namespace TB_Quest_Game.Models
             get { return _gender; }
         }
 
-        public bool AppearsFriendly
-        {
-            get { return _appearsFriendly; }
-            set { _appearsFriendly = value; }
-        }
-
         public int[] CurrentRoom
         {
             get { return _currentRoom; }
@@ -74,7 +67,7 @@ namespace TB_Quest_Game.Models
             _name = "Mr. Smith";
             _gender = Genders.Male;
             _race = Races.Human;
-            _appearsFriendly = true;
+            _currentRoom = new int[2];
         }
 
         public Person(string name,Genders gender, Races race)
@@ -82,15 +75,8 @@ namespace TB_Quest_Game.Models
             _name = name;
             _gender = gender;
             _race = race;
-            _appearsFriendly = true;
-        }
+            _currentRoom = new int[2];
 
-        public Person(string name, Genders gender, Races race, bool looksFriendly)
-        {
-            _name = name;
-            _gender = gender;
-            _race = race;
-            _appearsFriendly = looksFriendly;
         }
 
         #endregion
