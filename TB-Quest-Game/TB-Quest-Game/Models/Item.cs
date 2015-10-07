@@ -26,6 +26,7 @@ namespace TB_Quest_Game
         private string _description;
         private ItemTypes _itemType;
         private int _quantity;
+        private bool _visibleInsideInventory;
 
         #endregion
 
@@ -54,6 +55,25 @@ namespace TB_Quest_Game
         {
             get { return _quantity; }
             set { _quantity = value; }
+        }
+
+        public bool VisibleInsideInventory
+        {
+            get { return _visibleInsideInventory; }
+        }
+
+        #endregion
+
+        #region [ CONSTRUCTORS ]
+
+        /// <summary>
+        /// Default constructor, sets values based on type of item
+        /// </summary>
+        /// <param name="type">Type of item</param>
+        /// <param name="quanity"></param>
+        public Item(ItemTypes type, int quanity)
+        {
+
         }
 
         #endregion
