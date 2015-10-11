@@ -39,6 +39,20 @@ namespace TB_Quest_Game
             return output;
         }
 
+        public void InitializeGuards()
+        {
+            Guard doug = new Guard("Doug", Person.Genders.Male, Person.Races.Orc);
+            int[] dougCoords = { 0, 0};
+            doug.CurrentRoom = dougCoords;
+            Guards.Add(doug);
+
+            Guard sandra = new Guard("Sandra", Person.Genders.Female, Person.Races.Elf);
+            int[] sandraCoords = { 0, 2 };
+            sandra.CurrentRoom = sandraCoords;
+            Guards.Add(sandra);
+
+        }
+
         #endregion
 
         #region [ CONSTRUCTOR ]

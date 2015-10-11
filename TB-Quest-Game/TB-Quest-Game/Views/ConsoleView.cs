@@ -117,7 +117,7 @@ namespace TB_Quest_Game
 
             foreach (Guard g in _guardList.Guards)
             {
-                if (g.CurrentRoom == _player.CurrentRoom)
+                if (g.CurrentRoom[0] == _player.CurrentRoom[0] & g.CurrentRoom[1] == _player.CurrentRoom[1])
                 {
                     Console.WriteLine(_margin + "Guard: {0}", g.Name);
                 }
@@ -125,7 +125,7 @@ namespace TB_Quest_Game
 
             foreach (Staff s in _staffList.Staff)
             {
-                if (s.CurrentRoom == _player.CurrentRoom)
+                if (s.CurrentRoom[0] == _player.CurrentRoom[0] & s.CurrentRoom[1] == _player.CurrentRoom[1])
                 {
                     Console.WriteLine(_margin + "Staff: {0}", s.Name);
                 }
@@ -192,7 +192,7 @@ namespace TB_Quest_Game
                         List<Guard> guardList = new List<Guard>();
                         foreach (Guard g in _guardList.Guards)
                         {
-                            if (g.CurrentRoom == _player.CurrentRoom)
+                            if (g.CurrentRoom[0] == _player.CurrentRoom[0] & g.CurrentRoom[1] == _player.CurrentRoom[1])
                             {
                                 guardList.Add(g);
                             }
@@ -208,7 +208,7 @@ namespace TB_Quest_Game
                         List<Staff> staffList = new List<Staff>();
                         foreach (Staff s in _staffList.Staff)
                         {
-                            if (s.CurrentRoom == _player.CurrentRoom)
+                            if (s.CurrentRoom[0] == _player.CurrentRoom[0] & s.CurrentRoom[1] == _player.CurrentRoom[1])
                             {
                                 staffList.Add(s);
                             }
@@ -229,7 +229,7 @@ namespace TB_Quest_Game
                     {
                         foreach (Guard g in _guardList.Guards)
                         {
-                            if (g.Name == targetInput)
+                            if (g.Name.ToLower() == targetInput)
                                 output = g.Decription();
                         }
                     }
@@ -237,7 +237,7 @@ namespace TB_Quest_Game
                     {
                         foreach (Staff s in _staffList.Staff)
                         {
-                            if (s.Name == targetInput)
+                            if (s.Name.ToLower() == targetInput)
                                 output = s.Decription();
                         }
                     }

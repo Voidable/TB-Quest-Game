@@ -39,6 +39,21 @@ namespace TB_Quest_Game
             return output;
         }
 
+
+        public void InitializeStaff()
+        {
+            Staff max = new Staff("Max", Person.Genders.Male, Person.Races.Human);
+            int[] maxCoords = { 0, 0 };
+            max.CurrentRoom = maxCoords;
+            Staff.Add(max);
+
+            Staff bertha = new Staff("Bertha", Person.Genders.Female, Person.Races.Dwarf);
+            int[] berthaCoords = { 0, 3 };
+            bertha.CurrentRoom = berthaCoords;
+            Staff.Add(bertha);
+
+        }
+
         #endregion
 
         #region [ CONSTRUCTOR ]

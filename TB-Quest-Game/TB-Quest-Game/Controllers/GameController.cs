@@ -46,11 +46,13 @@ namespace TB_Quest_Game
         public void InitializeGuardList()
         {
             _guardList = new GuardList();
+            _guardList.InitializeGuards();
         }
 
         public void InitializeStaffList()
         {
             _staffList = new StaffList();
+            _staffList.InitializeStaff();
         }
 
         public void SetupGame()
