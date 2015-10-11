@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TB_Quest_Game
 {
-    class Room
+    public class Room
     {
         #region [ FIELDS ]
 
