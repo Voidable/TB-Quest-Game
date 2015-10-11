@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TB_Quest_Game
 {
-    class Guard : Person
+    class Staff : Person
     {
         #region [ FIELDS ]
 
@@ -26,7 +26,6 @@ namespace TB_Quest_Game
 
         #endregion
 
-
         #region [ METHODS ]
 
         /// <summary>
@@ -38,26 +37,32 @@ namespace TB_Quest_Game
             //  Create holding strings
             string message = "";
             string friendlyPrefix = "un";
+            string genderReference = "his";
 
             //  String for the friendly prefix
             if (this.AppearsFriendly)
                 friendlyPrefix = "";
 
-            if (Alive)  // Guard is alive
+            //string for the gender reference
+            if (this.Gender == Genders.Female)
+                genderReference = "her";
+
+
+            if (Alive)  // Staff is alive
             {
-                //  The player is very curt when describing living guards
-                message = string.Format("{0} {1}, Nametag reads {2}. Looks {3}friendly.",
+                //  The player is describing 
+                message = string.Format("An {3}friendly looking {0} staff member, according to {1} nametag {1} name is {2}",
                     this.Race,
-                    this.Gender,
+                    genderReference,
                     this.Name,
                     friendlyPrefix);
             }
-            else   //   Guard is dead
+            else   //   Staff is dead
             {
-                //  The player has more time to describe dead people
-                message = string.Format("The {0} {1} is laying dead on the ground, according to their nametag their name is {2}",
-                    this.Gender,
+                //  The player doesn't have much to say about dead people
+                message = string.Format("A dead {0} is laying on the ground, {1} nametag says {2}",
                     this.Race,
+                    genderReference,
                     this.Name);
             }
 
@@ -68,24 +73,24 @@ namespace TB_Quest_Game
         {
             this._isAlive = false;
 
-            return string.Format("The guard {0} has died.", this.Name);
+            return string.Format("The staff-member {0} has died.", this.Name);
         }
 
         #endregion
 
 
-        #region [ CONSTRUCTOR
+        #region [ CONSTRUCTOR ]
 
         /// <summary>
-        /// Constructor for Guards, assumes unfriendly and tells people to move along
+        /// Constructor for Staff, assumes friendly and tells people their name
         /// </summary>
-        /// <param name="name">Guards name</param>
-        /// <param name="gender">Guards gender</param>
-        /// <param name="race">Guards race</param>
-        public Guard(string name, Genders gender, Races race) : base(name, gender, race)
+        /// <param name="name">Staffs name</param>
+        /// <param name="gender">Staff gender</param>
+        /// <param name="race">Staffs race</param>
+        public Staff(string name, Genders gender, Races race) : base(name, gender, race)
         {
             AppearsFriendly = false;
-            InitialGreeting = "You should not be here!";
+            InitialGreeting = string.Format("Why hello there, my name is {0}", this.Name);
             _inventory = new List<Item>();
         }
 

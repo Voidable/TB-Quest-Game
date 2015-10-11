@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Room snippet</Title>
+      <Shortcut>roomgen</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Object>
+          <ID>Floor</ID>
+          <Default>0</Default>
+        </Object>
+        <Object>
+          <ID>Room</ID>
+          <Default>0</Default>
+        </Object>
+        <Literal>
+          <ID>Name</ID>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>Desc</ID>
+          <Default>Description</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp">
+        <![CDATA[            _rooms[$Floor$, $Room$] = new Room("$Name$", $Floor$, $Room$);
+            _rooms[$Floor$, $Room$].Desciption = "$Desc$";
+            #region Doors 
+            _rooms[$Floor$, $Room$].Doors[0, 1] = $Room$;   //  NORTH - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[1, 1] = $Room$;   //  NORTH-EAST - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[2, 1] = $Room$;   //  EAST - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[3, 1] = $Room$;   //  SOUTH-EAST - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[4, 1] = $Room$;   //  SOUTH - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[5, 1] = $Room$;   //  SOUTH-WEST - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[6, 1] = $Room$;   //  WEST - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[7, 1] = $Room$;   //  NORTH-WEST - Not possible
+
+            _rooms[$Floor$, $Room$].Doors[8, 0] = $Floor$;   //  UP
+            _rooms[$Floor$, $Room$].Doors[8, 1] = $Room$;   //  Not possible
+
+            _rooms[$Floor$, $Room$].Doors[9, 0] = $Floor$;   //  DOWN
+            _rooms[$Floor$, $Room$].Doors[9, 1] = $Room$;   //  Not Possible
+            #endregion]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

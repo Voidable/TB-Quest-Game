@@ -32,6 +32,8 @@ namespace TB_Quest_Game
         private Races _race;
         private Genders _gender;
         private int[] _currentRoom;
+        protected bool _isAlive;
+        private string _initialGreeting;
 
         #endregion
 
@@ -58,6 +60,28 @@ namespace TB_Quest_Game
             set { _currentRoom = value; }
         }
 
+        public bool Alive
+        {
+            get { return _isAlive; }
+        }
+
+        public string InitialGreeting
+        {
+            get { return _initialGreeting; }
+            set { _initialGreeting = value; }
+        }
+
+        #endregion
+
+        #region [ METHODS ]
+
+        virtual public string Death()
+        {
+            this._isAlive = false;
+
+            return string.Format("{0} has died.", this.Name);
+        }
+
         #endregion
 
         #region [ CONSTRUCTOR ]
@@ -68,6 +92,7 @@ namespace TB_Quest_Game
             _gender = Genders.Male;
             _race = Races.Human;
             _currentRoom = new int[2];
+            _isAlive = true;
         }
 
         public Person(string name,Genders gender, Races race)
@@ -76,7 +101,7 @@ namespace TB_Quest_Game
             _gender = gender;
             _race = race;
             _currentRoom = new int[2];
-
+            _isAlive = true;
         }
 
         #endregion

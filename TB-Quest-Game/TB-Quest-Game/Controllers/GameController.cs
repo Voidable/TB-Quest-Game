@@ -29,7 +29,7 @@ namespace TB_Quest_Game
 
         private void InitializePlayer()
         {
-            _myPlayer = new Player("Bob");
+
         }
     }
 }

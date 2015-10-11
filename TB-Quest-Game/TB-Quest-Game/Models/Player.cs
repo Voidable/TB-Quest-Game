@@ -15,5 +15,12 @@ namespace TB_Quest_Game
         {
             _inventory = new List<Item>();
         }
+
+        override public string Death()
+        {
+            this._isAlive = false;
+
+            return string.Format("I hav died.", this.Name);
+        }
     }
 }
