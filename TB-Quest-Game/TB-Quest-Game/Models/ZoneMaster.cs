@@ -8,6 +8,20 @@ namespace TB_Quest_Game
 {
     public class ZoneMaster
     {
+        public enum Directions
+        {
+            North,
+            NorthEast,
+            East,
+            SouthEast,
+            South,
+            SouthWest,
+            West,
+            NorthWest,
+            Up,
+            Down
+        }
+
         #region [ FIELDS ]
 
         private Room[,] _rooms;
@@ -133,6 +147,47 @@ namespace TB_Quest_Game
             _rooms[0, 3].Doors[9, 0] = 0;   //  DOWN
             _rooms[0, 3].Doors[9, 1] = 3;   //  Not Possible
             #endregion
+        }
+
+        public bool CheckValidMove(Directions direction, int floorNumber, int roomNumber)
+        {
+            bool valid = false;
+
+            int directionValue = (int)direction;
+
+            if (!(direction == Directions.Up | direction == Directions.Down))
+            {
+                if ((_rooms[floorNumber, roomNumber].Doors[directionValue, 0] == floorNumber))
+                {
+                    if (!(_rooms[floorNumber, roomNumber].Doors[directionValue, 1] == roomNumber))
+                    {
+                        valid = true;
+                    }
+                }
+            }
+            else
+            {
+                if (!(_rooms[floorNumber, roomNumber].Doors[directionValue, 0] == floorNumber))
+                {
+                    valid = true;
+                }
+            }
+
+
+            return valid;
+        }
+
+        public int[] MoveCoords(Directions direction, int floorNumber, int roomNumber)
+        {
+            int[] coords = new int[2];
+
+            int directionValue = (int)direction;
+
+            coords[0] = _rooms[floorNumber, roomNumber].Doors[directionValue, 0];
+            coords[1] = _rooms[floorNumber, roomNumber].Doors[directionValue, 1];
+
+            return coords;
+
         }
 
         #endregion

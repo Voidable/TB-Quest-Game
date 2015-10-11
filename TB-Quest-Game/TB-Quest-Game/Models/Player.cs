@@ -11,6 +11,12 @@ namespace TB_Quest_Game
 
         private List<Item> _inventory;
 
+        public List<Item> Inventory
+        {
+            get { return _inventory; }
+            set { _inventory = value; }
+        }
+
         public Player(string name, Genders gender, Races race):base(name,gender,race)
         {
             _inventory = new List<Item>();
