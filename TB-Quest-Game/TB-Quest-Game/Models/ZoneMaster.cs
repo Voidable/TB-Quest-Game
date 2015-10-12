@@ -8,6 +8,9 @@ namespace TB_Quest_Game
 {
     public class ZoneMaster
     {
+        /// <summary>
+        /// Enumeration of all possible directions
+        /// </summary>
         public enum Directions
         {
             North,
@@ -23,7 +26,10 @@ namespace TB_Quest_Game
         }
 
         #region [ FIELDS ]
-
+        
+        /// <summary>
+        /// Private list of rooms
+        /// </summary>
         private Room[,] _rooms;
 
         #endregion
@@ -31,6 +37,9 @@ namespace TB_Quest_Game
 
         #region [ PROPERTIES ]
 
+        /// <summary>
+        /// Public list of rooms
+        /// </summary>
         public Room[,] Rooms
         {
             get { return _rooms; }
@@ -42,6 +51,9 @@ namespace TB_Quest_Game
 
         #region [ METHODS]
 
+        /// <summary>
+        /// Creates the rooms
+        /// </summary>
         public void InitializeRooms()
         {
             _rooms[0, 0] = new Room("North of building", 0, 0);
@@ -149,6 +161,13 @@ namespace TB_Quest_Game
             #endregion
         }
 
+        /// <summary>
+        /// Returns if the desired movement is valid
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="floorNumber"></param>
+        /// <param name="roomNumber"></param>
+        /// <returns></returns>
         public bool CheckValidMove(Directions direction, int floorNumber, int roomNumber)
         {
             bool valid = false;
@@ -177,6 +196,13 @@ namespace TB_Quest_Game
             return valid;
         }
 
+        /// <summary>
+        /// Gets the destination coordinates of the desired movement
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="floorNumber"></param>
+        /// <param name="roomNumber"></param>
+        /// <returns></returns>
         public int[] MoveCoords(Directions direction, int floorNumber, int roomNumber)
         {
             int[] coords = new int[2];
@@ -195,6 +221,9 @@ namespace TB_Quest_Game
 
         #region [ CONSTUCTORS ]
 
+        /// <summary>
+        /// Default constructor for zonemaster, assumes 6 floors and 10 rooms per floor
+        /// </summary>
         public ZoneMaster()
         {
             _rooms = new Room[6, 10];

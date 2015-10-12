@@ -10,6 +10,9 @@ namespace TB_Quest_Game
     {
         #region [ ENUMERATION ]
 
+        /// <summary>
+        /// Enumeration of possible races
+        /// </summary>
         public enum Races
         {
             Human,
@@ -18,6 +21,9 @@ namespace TB_Quest_Game
             Orc
         }
 
+        /// <summary>
+        /// Enumeration of genders
+        /// </summary>
         public enum Genders
         {
             Male,
@@ -39,32 +45,50 @@ namespace TB_Quest_Game
 
         #region [ PROPERTIES ]
 
+        /// <summary>
+        /// Person's name
+        /// </summary>
         public string Name
         {
             get { return _name; }
         }
 
+        /// <summary>
+        /// Person's race
+        /// </summary>
         public Races Race
         {
             get { return _race; }
         }
 
+        /// <summary>
+        /// Person's gender
+        /// </summary>
         public Genders Gender
         {
             get { return _gender; }
         }
 
+        /// <summary>
+        /// Person's current location
+        /// </summary>
         public int[] CurrentRoom
         {
             get { return _currentRoom; }
             set { _currentRoom = value; }
         }
 
+        /// <summary>
+        /// Is the person alive
+        /// </summary>
         public bool Alive
         {
             get { return _isAlive; }
         }
 
+        /// <summary>
+        /// The person's initial greeting when you talk to them
+        /// </summary>
         public string InitialGreeting
         {
             get { return _initialGreeting; }
@@ -75,6 +99,10 @@ namespace TB_Quest_Game
 
         #region [ METHODS ]
 
+        /// <summary>
+        /// Person is now kill
+        /// </summary>
+        /// <returns>Death message</returns>
         virtual public string Death()
         {
             this._isAlive = false;
@@ -86,6 +114,9 @@ namespace TB_Quest_Game
 
         #region [ CONSTRUCTOR ]
 
+        /// <summary>
+        /// Default person constructor
+        /// </summary>
         public Person()
         {
             _name = "Mr. Smith";
@@ -95,6 +126,12 @@ namespace TB_Quest_Game
             _isAlive = true;
         }
 
+        /// <summary>
+        /// Overloaded person constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="gender"></param>
+        /// <param name="race"></param>
         public Person(string name,Genders gender, Races race)
         {
             _name = name;

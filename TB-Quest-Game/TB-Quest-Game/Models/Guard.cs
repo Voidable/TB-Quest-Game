@@ -64,6 +64,10 @@ namespace TB_Quest_Game
             return message;
         }
 
+        /// <summary>
+        /// The person has died
+        /// </summary>
+        /// <returns>A string with the persons death message</returns>
         override public string Death()
         {
             this._isAlive = false;

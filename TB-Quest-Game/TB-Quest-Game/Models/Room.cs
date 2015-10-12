@@ -14,8 +14,6 @@ namespace TB_Quest_Game
         private string _description;
         private int[] _coords;
         private bool _isLighted;
-        private List<Guard> _guards;
-        private List<Staff> _staff;
         private int[,] _doors;
 
         #endregion
@@ -23,42 +21,45 @@ namespace TB_Quest_Game
 
         #region [ PROPERTIES ]
 
+        /// <summary>
+        /// Name of room
+        /// </summary>
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
+        /// <summary>
+        /// Description of room
+        /// </summary>
         public string Desciption
         {
             get { return _description; }
             set { _description = value; }
         }
 
+        /// <summary>
+        /// Coordinates of the room
+        /// </summary>
         public int[] Coords
         {
             get { return _coords; }
             set { _coords = value; }
         }
 
+        /// <summary>
+        /// Is the room bright enough to see
+        /// </summary>
         public bool IsLighed
         {
             get { return _isLighted; }
             set { _isLighted = value; }
         }
 
-        public List<Guard> Guards
-        {
-            get { return _guards; }
-            set { _guards = value; }
-        }
-
-        public List<Staff> Staff
-        {
-            get { return _staff; }
-            set { _staff = value; }
-        }
-
+        /// <summary>
+        /// Array of movable directions
+        /// </summary>
         public int[,] Doors
         {
             get { return _doors; }
@@ -68,12 +69,11 @@ namespace TB_Quest_Game
         #endregion
 
 
-        #region [ METHODS ]
-
-        #endregion
-
         #region [ CONSTRUCTORS ]
 
+        /// <summary>
+        /// Default constructor, makes an inescapable room
+        /// </summary>
         public Room()
         {
             _name = "Generic room";
@@ -84,8 +84,6 @@ namespace TB_Quest_Game
                 _coords[1] = 0; //  Room number
             }
             _isLighted = true;
-            _guards = new List<Guard>();
-            _staff = new List<Staff>();
             _doors = new int[10, 2];
             {   //  You cannot leave a generic room, MWAHAHAHA
                 _doors[0, 0] = 0;   //  North
@@ -120,6 +118,12 @@ namespace TB_Quest_Game
             }
         }
 
+        /// <summary>
+        /// Overloaded room constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="floorNumber"></param>
+        /// <param name="roomNumber"></param>
         public Room(string name, int floorNumber, int roomNumber)
         {
             _name = name;
@@ -130,8 +134,6 @@ namespace TB_Quest_Game
                 _coords[1] = roomNumber; //  Room number
             }
             _isLighted = true;
-            _guards = new List<Guard>();
-            _staff = new List<Staff>();
             _doors = new int[10, 2];
             {   //  Doors need to be set by the ZoneMaster
                 _doors[0, 0] = 0;   //  North

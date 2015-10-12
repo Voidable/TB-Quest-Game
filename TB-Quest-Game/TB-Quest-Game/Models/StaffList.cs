@@ -27,7 +27,11 @@ namespace TB_Quest_Game
 
         #region [ METHODS ]
 
-        public string GetGuardList()
+        /// <summary>
+        /// Returns a string with all Staff member's information
+        /// </summary>
+        /// <returns></returns>
+        public string GetStaffList()
         {
             string output = "";
 
@@ -39,7 +43,9 @@ namespace TB_Quest_Game
             return output;
         }
 
-
+        /// <summary>
+        /// Creates the initial staff
+        /// </summary>
         public void InitializeStaff()
         {
             Staff max = new Staff("Max", Person.Genders.Male, Person.Races.Human);
@@ -58,6 +64,9 @@ namespace TB_Quest_Game
 
         #region [ CONSTRUCTOR ]
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public StaffList()
         {
             _staff = new List<Staff>();

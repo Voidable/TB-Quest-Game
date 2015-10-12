@@ -69,6 +69,10 @@ namespace TB_Quest_Game
             return message;
         }
 
+        /// <summary>
+        /// Returns the staff's death method
+        /// </summary>
+        /// <returns></returns>
         override public string Death()
         {
             this._isAlive = false;
@@ -89,7 +93,7 @@ namespace TB_Quest_Game
         /// <param name="race">Staffs race</param>
         public Staff(string name, Genders gender, Races race) : base(name, gender, race)
         {
-            AppearsFriendly = false;
+            AppearsFriendly = true;
             InitialGreeting = string.Format("Why hello there, my name is {0}", this.Name);
             _inventory = new List<Item>();
         }

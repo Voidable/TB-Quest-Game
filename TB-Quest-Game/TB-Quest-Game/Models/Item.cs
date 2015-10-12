@@ -10,6 +10,9 @@ namespace TB_Quest_Game
     {
         #region [ ENUMERATIONS ]
 
+        /// <summary>
+        /// Enumeration of all possible items
+        /// </summary>
         public enum ItemTypes
         {
             Flashlight,
@@ -34,30 +37,45 @@ namespace TB_Quest_Game
 
         #region [ PROPERTIES ]
 
+        /// <summary>
+        /// The items name
+        /// </summary>
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
+        /// <summary>
+        /// The item's description
+        /// </summary>
         public string Description
         {
             get { return _description; }
             set { _description = value; }
         }
 
+        /// <summary>
+        /// The item's type
+        /// </summary>
         public ItemTypes ItemType
         {
             get { return _itemType; }
             set { _itemType = value; }
         }
 
+        /// <summary>
+        /// The amount of the item
+        /// </summary>
         public int Quantity
         {
             get { return _quantity; }
             set { _quantity = value; }
         }
 
+        /// <summary>
+        /// Can it be seen from afar, or can it be hidden
+        /// </summary>
         public bool VisibleInsideInventory
         {
             get { return _visibleInsideInventory; }

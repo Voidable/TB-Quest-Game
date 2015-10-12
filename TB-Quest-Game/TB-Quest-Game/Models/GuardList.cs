@@ -9,7 +9,7 @@ namespace TB_Quest_Game
     public class GuardList
     {
         #region [ FIELDS ]
-
+        //  The list itself
         private List<Guard> _guards;
 
         #endregion
@@ -17,6 +17,7 @@ namespace TB_Quest_Game
 
         #region [ PROPERTIES ]
 
+        //  Public reference to the list
         public List<Guard> Guards
         {
             get { return _guards; }
@@ -27,6 +28,10 @@ namespace TB_Quest_Game
 
         #region [ METHODS ]
 
+        /// <summary>
+        /// Returns a list of all Guards
+        /// </summary>
+        /// <returns></returns>
         public string GetGuardList()
         {
             string output = "";
@@ -39,6 +44,9 @@ namespace TB_Quest_Game
             return output;
         }
 
+        /// <summary>
+        /// Creates the initial guards
+        /// </summary>
         public void InitializeGuards()
         {
             Guard doug = new Guard("Doug", Person.Genders.Male, Person.Races.Orc);
@@ -57,6 +65,9 @@ namespace TB_Quest_Game
 
         #region [ CONSTRUCTOR ]
 
+        /// <summary>
+        /// Default constructor for the guard list
+        /// </summary>
         public GuardList()
         {
             _guards = new List<Guard>();
