@@ -13,11 +13,12 @@ namespace TB_Quest_Game
         /// </summary>
         public enum Commands
         {
-            go,
-            look,
-            play,
-            quit,
-            wait
+            Go,
+            Look,
+            Play,
+            Quit,
+            Wait,
+            Help
         }
 
         #region [ FIELDS ]
@@ -108,13 +109,13 @@ namespace TB_Quest_Game
                 //  Get input from players
                 Commands command = viewWindow.GetPlayerCommand();
 
-                if (command == Commands.play)   //  Player wants to play the game
+                if (command == Commands.Play)   //  Player wants to play the game
                 {
                     playingGame = true;
                     validInput = true;
                 }
 
-                else if (command == Commands.quit)  //  Player wants to quit the game
+                else if (command == Commands.Quit)  //  Player wants to quit the game
                 {
                     playingGame = false;
                     validInput = true;
@@ -139,7 +140,7 @@ namespace TB_Quest_Game
                 //  Get command from player
                 Commands command = viewWindow.GetPlayerCommand();
 
-                if (command == Commands.go) //  Player wants to go somewhere
+                if (command == Commands.Go) //  Player wants to go somewhere
                 {
                     //  Get the direction the player wants to travel, parsing the player's input to the Diretion type enum.
                     ZoneMaster.Directions direction = (ZoneMaster.Directions)Enum.Parse(typeof(ZoneMaster.Directions), viewWindow.GetPlayerSubject(command));
@@ -161,17 +162,21 @@ namespace TB_Quest_Game
                         viewWindow.DisplayMessage("You cannot go that way!");
                     }
                 }
-                else if (command == Commands.look)  //  Player wants to look at something
+                else if (command == Commands.Look)  //  Player wants to look at something
                 {
                     viewWindow.DisplayMessage(viewWindow.GetPlayerSubject(command));    //  Get the subject matter
                 }
-                else if (command == Commands.wait)  //  Player wants to do something
+                else if (command == Commands.Wait)  //  Player wants to do something
                 {
                     viewWindow.DisplayMessage("I'll wait here for a second");
                 }
-                else if(command == Commands.quit)   //  Player wants to exit
+                else if(command == Commands.Quit)   //  Player wants to exit
                 {
                     playingGame = false;
+                }
+                else if(command == Commands.Help)
+                {
+                    viewWindow.DisplayCommands();
                 }
                 else   //   This currently catches any unavailable commands, like the play command
                 {

@@ -176,7 +176,7 @@ namespace TB_Quest_Game
         public GameController.Commands GetPlayerCommand()
         {
             //  create holder, initial value is wait
-            GameController.Commands output = GameController.Commands.wait;
+            GameController.Commands output = GameController.Commands.Wait;
 
             bool validInput = false;
 
@@ -185,16 +185,13 @@ namespace TB_Quest_Game
                 string input = Console.ReadLine();  //  Get input
 
                 GameController.Commands command;  //  Parse input string to enum
-                if (Enum.TryParse<GameController.Commands>(input,true,out command)) //  Valid input
+                if (Enum.TryParse<GameController.Commands>(input, true, out command)) //  Valid input
                 {
                     output = command;
                     validInput = true;
                 }
 
-                else
-                {
-                    //  Invalid input
-                }
+                else   //  Invalid input
                 {
                     Console.WriteLine("I didn't understand that,  try again");
                 }
@@ -215,10 +212,10 @@ namespace TB_Quest_Game
 
             switch (command)    //  Switch based on inputed command
             {
-                case GameController.Commands.go:    //  Player wants to go somewhere
+                case GameController.Commands.Go:    //  Player wants to go somewhere
 
                     Console.WriteLine("Go where?"); //  Prompt player for direction
-                    string directionInput = Console.ReadLine(); 
+                    string directionInput = Console.ReadLine();
 
                     ZoneMaster.Directions direction;    //  Parse direction to valid direction
                     if (Enum.TryParse<ZoneMaster.Directions>(directionInput, true, out direction))  //  Successfull parse
@@ -231,7 +228,7 @@ namespace TB_Quest_Game
                     }
                     break;
 
-                case GameController.Commands.look:  //  Player wants to look at something
+                case GameController.Commands.Look:  //  Player wants to look at something
 
                     Console.WriteLine("Look at what?"); //  Prompt player for clarification
                     string targetInput = Console.ReadLine().ToLower();
@@ -306,16 +303,8 @@ namespace TB_Quest_Game
 
                     break;
 
-                    //  The remaining commands don't need clarification
-
-                case GameController.Commands.play:
-                    output = "play";
-                    break;
-                case GameController.Commands.quit:
-                    output = "quit";
-                    break;
-                case GameController.Commands.wait:
-                    output = "wait";
+                //  The remaining commands don't need clarification
+                default:
                     break;
             }
 
