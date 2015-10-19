@@ -81,6 +81,7 @@ namespace TB_Quest_Game
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
         }
+
         /// <summary>
         /// Displays the intitial information.
         /// </summary>
@@ -315,6 +316,21 @@ namespace TB_Quest_Game
                 default:
                     break;
             }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Gets a noun from the player for use in elaborating commands
+        /// </summary>
+        /// <param name="message">Message to show player to elaborate desired input</param>
+        /// <returns>Returns string with player input</returns>
+        public string GetPlayerNoun(string message)
+        {
+            string output = "";
+
+            Console.WriteLine(message);
+            output = Console.ReadLine();
 
             return output;
         }

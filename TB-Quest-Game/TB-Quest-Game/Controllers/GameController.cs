@@ -68,7 +68,6 @@ namespace TB_Quest_Game
             _guardList.InitializeGuards();
         }
 
-
         /// <summary>
         /// Creates the Stafflist and initializes the staff
         /// </summary>
@@ -139,48 +138,70 @@ namespace TB_Quest_Game
                 //  Get command from player
                 Commands command = viewWindow.GetPlayerCommand();
 
+                #region Go command
                 if (command == Commands.Go) //  Player wants to go somewhere
                 {
-                    //  Get the direction the player wants to travel, parsing the player's input to the Diretion type enum.
-                    ZoneMaster.Directions direction = (ZoneMaster.Directions)Enum.Parse(typeof(ZoneMaster.Directions), viewWindow.GetPlayerSubject(command));
+                    // Get the direction player wants to travel, parsing input from console
+                    ZoneMaster.Directions direction;    // Direction holder
 
-                    //  Check's if the desired move is valid
-                    if (_zoneMaster.CheckValidMove(direction, _myPlayer.CurrentRoom[0], _myPlayer.CurrentRoom[1]))  //  Valid move
+                    if (!   //  If the input is not parsible to a direction, error message!
+                        (Enum.TryParse<ZoneMaster.Directions>
+                            (viewWindow.GetPlayerNoun("What direction would you like to go?"),
+                            true, out direction)))
                     {
-                        //  Get the new coordinates from the Zonemaster
-                        int[] coords = _zoneMaster.MoveCoords(direction, _myPlayer.CurrentRoom[0], _myPlayer.CurrentRoom[1]);
-
-                        //  Set the players coords to the new coords
-                        _myPlayer.CurrentRoom = coords;
-
-                        //  Display the room information
-                        viewWindow.DisplayRoomInformation();
+                        viewWindow.DisplayMessage("That's not a valid direction!");
                     }
-                    else   //   Invalid move
+                    else   // Input successfully parsed
                     {
-                        viewWindow.DisplayMessage("You cannot go that way!");
+                        //  Check's if the desired move is valid
+                        if (_zoneMaster.CheckValidMove(direction, _myPlayer.CurrentRoom[0], _myPlayer.CurrentRoom[1]))  //  Valid move
+                        {
+                            //  Get the new coordinates from the Zonemaster
+                            int[] coords = _zoneMaster.MoveCoords(direction, _myPlayer.CurrentRoom[0], _myPlayer.CurrentRoom[1]);
+
+                            //  Set the players coords to the new coords
+                            _myPlayer.CurrentRoom = coords;
+
+                            //  Display the room information
+                            viewWindow.DisplayRoomInformation();
+                        }
+                        else   //   Invalid move
+                        {
+                            viewWindow.DisplayMessage("You cannot go that way!");
+                        }
                     }
                 }
+                #endregion
+                #region Look command
                 else if (command == Commands.Look)  //  Player wants to look at something
                 {
                     viewWindow.DisplayMessage(viewWindow.GetPlayerSubject(command));    //  Get the subject matter
                 }
+                #endregion
+                #region Wait command
                 else if (command == Commands.Wait)  //  Player wants to do something
                 {
                     viewWindow.DisplayMessage("I'll wait here for a second");
                 }
-                else if(command == Commands.Quit)   //  Player wants to exit
+                #endregion
+                #region Quit command
+                else if (command == Commands.Quit)   //  Player wants to exit
                 {
                     playingGame = false;
                 }
-                else if(command == Commands.Help)
+                #endregion
+                #region Help command
+                else if (command == Commands.Help)
                 {
                     viewWindow.DisplayCommands();
                 }
+                #endregion
+                #region Unavailable command
                 else   //   This currently catches any unavailable commands, like the play command
                 {
                     viewWindow.DisplayMessage("I cant do that right now.");
                 }
+                #endregion
 
             }
 
