@@ -10,7 +10,7 @@ namespace TB_Quest_Game
     {
         #region [ FIELDS ]
         //  Window dimensions
-        private const int WINDOW_WIDTH = 100;
+        private const int WINDOW_WIDTH = 101;
         private const int WINDOW_HEIGHT = 40;
 
         //  Horizontal margin
@@ -63,14 +63,23 @@ namespace TB_Quest_Game
         /// </summary>
         public void DrawHeader()
         {
-            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = ConsoleColor.Gray;
+
+            string blank = new string(' ', WINDOW_WIDTH);
+
+            Console.WriteLine(blank);
 
             string middleLine = new string(' ', ((WINDOW_WIDTH - HEADER_TEXT.Count()) / 2));
             middleLine = middleLine + HEADER_TEXT + middleLine;
 
             Console.WriteLine(middleLine);
 
-            Console.WriteLine("");
+            Console.WriteLine(blank);
+
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
         }
         /// <summary>
         /// Displays the intitial information.
