@@ -39,7 +39,6 @@ namespace TB_Quest_Game
         public void DisplayClear()
         {
             Console.Clear();
-            DrawHeader();
         }
 
         /// <summary>
@@ -48,6 +47,7 @@ namespace TB_Quest_Game
         public void DisplayGreeting()
         {
             DrawHeader();
+
 
             for (int i = 0; i < VERTICAL_MARGIN; i++)
             {
@@ -72,7 +72,6 @@ namespace TB_Quest_Game
 
             Console.WriteLine("");
         }
-
         /// <summary>
         /// Displays the intitial information.
         /// </summary>

@@ -122,8 +122,7 @@ namespace TB_Quest_Game
                 }
                 else   //   Player has entered an invalid command
                 {
-                    viewWindow.DisplayClear();
-                    viewWindow.DisplayGreeting();
+                    viewWindow.DisplayMessage("That is not a valid command!");
                 }
             }
 
