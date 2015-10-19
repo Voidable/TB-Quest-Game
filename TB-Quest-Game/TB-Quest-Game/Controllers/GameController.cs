@@ -96,6 +96,8 @@ namespace TB_Quest_Game
             //  Create the view window
             ConsoleView viewWindow = new ConsoleView(_myPlayer, _staffList, _guardList, _zoneMaster);
 
+            #region Menu
+
             //  Display the greeting
             viewWindow.DisplayGreeting();
 
@@ -103,6 +105,7 @@ namespace TB_Quest_Game
             bool validInput = false;
             bool playingGame = false;
 
+            #region Main Menu Input Loop
             while (!validInput)
             {
                 //  Get input from players
@@ -124,9 +127,12 @@ namespace TB_Quest_Game
                     viewWindow.DisplayMessage("That is not a valid command!");
                 }
             }
+            #endregion
 
+            #endregion
+
+            #region Game logic loop
             bool initialPrompt = true;
-
             while (playingGame) // While playing the game, loop through the core logic
             {
                 if (initialPrompt)  //  Display the initial prompt if we havent before
@@ -175,7 +181,75 @@ namespace TB_Quest_Game
                 #region Look command
                 else if (command == Commands.Look)  //  Player wants to look at something
                 {
-                    viewWindow.DisplayMessage(viewWindow.GetPlayerSubject(command));    //  Get the subject matter
+                    //  Prompt player for clarification
+                    string targetInput = viewWindow.GetPlayerNoun("Look at what?");
+
+                    //  Create string array's of valid  objects to look at
+                    string[] self = { "me", "myself" };
+                    string[] guards;
+                    string[] staff;
+
+                    #region Getting subjects
+                    {   //  Get all the guards
+
+                        List<Guard> guardList = new List<Guard>();
+                        foreach (Guard g in _guardList.Guards)
+                        {   //  If a guard is in the same room as the player, add them to the list
+                            if (g.CurrentRoom[0] == _myPlayer.CurrentRoom[0] & g.CurrentRoom[1] == _myPlayer.CurrentRoom[1])
+                            {
+                                guardList.Add(g);
+                            }
+                        }
+                        guards = new string[guardList.Count];   //  Add the guard's name from the list to the array
+                        for (int i = 0; i < guardList.Count; i++)
+                        {
+                            guards[i] = guardList.ElementAt(i).Name.ToLower();
+                        }
+                    }
+
+
+                    {   //  Get all the staff
+
+                        List<Staff> staffList = new List<Staff>();
+                        foreach (Staff s in _staffList.Staff)
+                        {   //  If a staff is in the same room as the player, add them to the list
+                            if (s.CurrentRoom[0] == _myPlayer.CurrentRoom[0] & s.CurrentRoom[1] == _myPlayer.CurrentRoom[1])
+                            {
+                                staffList.Add(s);
+                            }
+                        }
+                        staff = new string[staffList.Count];    //  Add the staff's name from the list to the array
+                        for (int i = 0; i < staffList.Count; i++)
+                        {
+                            staff[i] = staffList.ElementAt(i).Name.ToLower();
+                        }
+                    }
+                    #endregion
+
+                    if (self.Contains(targetInput)) //  Player says "me" or "myself"
+                    {
+                        viewWindow.DisplayMessage("I look awesome, obviously!");
+                    }
+                    else if (guards.Contains(targetInput))  //  Player says name of guard
+                    {
+                        foreach (Guard g in _guardList.Guards)
+                        {
+                            if (g.Name.ToLower() == targetInput)
+                                 viewWindow.DisplayMessage(g.Decription());
+                        }
+                    }
+                    else if (staff.Contains(targetInput))   //  Player says name of staff
+                    {
+                        foreach (Staff s in _staffList.Staff)
+                        {
+                            if (s.Name.ToLower() == targetInput)
+                                viewWindow.DisplayMessage(s.Decription());
+                        }
+                    }
+                    else   //   Player says something that is not there
+                    {
+                        viewWindow.DisplayMessage(string.Format("There is no {0} here", targetInput));
+                    }
                 }
                 #endregion
                 #region Wait command
@@ -205,7 +279,7 @@ namespace TB_Quest_Game
 
             }
 
-
+            #endregion
         }
 
         #endregion

@@ -222,19 +222,7 @@ namespace TB_Quest_Game
             switch (command)    //  Switch based on inputed command
             {
                 case GameController.Commands.Go:    //  Player wants to go somewhere
-
-                    Console.WriteLine("Go where?"); //  Prompt player for direction
-                    string directionInput = Console.ReadLine();
-
-                    ZoneMaster.Directions direction;    //  Parse direction to valid direction
-                    if (Enum.TryParse<ZoneMaster.Directions>(directionInput, true, out direction))  //  Successfull parse
-                    {
-                        output = direction.ToString();  //  Return direction as string
-                    }
-                    else   //   Invalid input
-                    {
-                        Console.WriteLine("Thats not a direction");
-                    }
+                    //  Move to game controller
                     break;
 
                 case GameController.Commands.Look:  //  Player wants to look at something
