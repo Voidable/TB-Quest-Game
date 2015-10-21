@@ -43,9 +43,9 @@ namespace TB_Quest_Game
         /// <summary>
         /// Creates the player, defaults to Bob
         /// </summary>
-        public void InitializePlayer()
+        public void InitializePlayer(string name, Person.Genders gender, Person.Races race)
         {
-            _myPlayer = new Player("Bob", Person.Genders.Male, Person.Races.Human);
+            _myPlayer = new Player(name, gender, race);
             _myPlayer.CurrentRoom[0] = 0;
             _myPlayer.CurrentRoom[1] = 0;
         }
@@ -82,7 +82,6 @@ namespace TB_Quest_Game
         /// </summary>
         public void SetupGame()
         {
-            InitializePlayer();
             InitializeZoneMaster();
             InitializeGuardList();
             InitializeStaffList();
@@ -94,9 +93,9 @@ namespace TB_Quest_Game
         public void PlayGame()
         {
             //  Create the view window
-            ConsoleView viewWindow = new ConsoleView(_myPlayer, _staffList, _guardList, _zoneMaster);
+            ConsoleView viewWindow = new ConsoleView(ref _myPlayer, ref _staffList, ref _guardList, ref _zoneMaster);
 
-            #region Menu
+            #region Main Menu
 
             //  Display the greeting
             viewWindow.DisplayGreeting();
@@ -105,7 +104,7 @@ namespace TB_Quest_Game
             bool validInput = false;
             bool playingGame = false;
 
-            #region Main Menu Input Loop
+            #region Main-Menu Input Loop
             while (!validInput)
             {
                 //  Get input from players
@@ -131,16 +130,103 @@ namespace TB_Quest_Game
 
             #endregion
 
-            #region Game logic loop
-            bool initialPrompt = true;
-            while (playingGame) // While playing the game, loop through the core logic
+            #region Create-Player Menu
+
+            #region Race
+            bool validRace = false;
+            Person.Races race = Person.Races.Human;
+
+            while (!validRace)
             {
-                if (initialPrompt)  //  Display the initial prompt if we havent before
+                //  Clear the window
+                viewWindow.DisplayClear();
+
+                //  Prompt user for their race
+                viewWindow.DisplayMessage("What race are you?\n");
+                viewWindow.DisplayValidRaces();
+                string input = viewWindow.GetPlayerNoun("");
+
+                if (Enum.TryParse<Person.Races>(input, true, out race))
                 {
-                    viewWindow.DisplayInitialInformation();
-                    initialPrompt = false;
+                    validRace = true;
                 }
 
+                else
+                {
+                    viewWindow.DisplayMessage("That didn't make sense, try again.");
+                    viewWindow.WaitForPlayer();
+                }
+            }
+            #endregion
+            #region Gender
+            bool validGender = false;
+            Person.Genders gender = Person.Genders.Male;
+
+            while (!validGender)
+            {
+                //  Clear the window
+                viewWindow.DisplayClear();
+
+                //  Prompt user for their race
+                viewWindow.DisplayMessage("What Gender are you?\n");
+                viewWindow.DisplayValidGenders();
+                string input = viewWindow.GetPlayerNoun("");
+
+                if (Enum.TryParse<Person.Genders>(input, true, out gender))
+                {
+                    validGender = true;
+                }
+
+                else
+                {
+                    viewWindow.DisplayMessage("That didn't make sense, try again.");
+                    viewWindow.WaitForPlayer();
+                }
+            }
+            #endregion
+            #region Name
+
+            string name = "";
+            bool validName = false;
+
+            while (!validName)
+            {
+                viewWindow.DisplayClear();
+                name = viewWindow.GetPlayerNoun("\n\tWhat is your name?");
+
+                string correct = viewWindow.GetPlayerNoun("\n\tAre you sure? Y/N");
+
+                if (correct.ToUpper() == "Y" || correct.ToUpper() == "YES")
+                {
+                    validName = true;
+                }
+                else if (correct.ToUpper() == "N" || correct.ToUpper() == "NO")
+                {
+                    viewWindow.WaitForPlayer();
+                }
+                else
+                {
+                    viewWindow.DisplayMessage("Please enter \'Y\' for yes, or \'N\' for no");
+                    viewWindow.WaitForPlayer();
+                }
+            }
+
+            #endregion
+
+            //  Create the player with the entered values
+            InitializePlayer(name, gender, race);
+
+            #endregion
+
+            #region Initial prompt;
+
+            viewWindow.DisplayInitialInformation();
+
+            #endregion
+
+            #region Game-logic loop
+            while (playingGame) // While playing the game, loop through the core logic
+            {
                 //  Get command from player
                 Commands command = viewWindow.GetPlayerCommand();
 
@@ -235,7 +321,7 @@ namespace TB_Quest_Game
                         foreach (Guard g in _guardList.Guards)
                         {
                             if (g.Name.ToLower() == targetInput)
-                                 viewWindow.DisplayMessage(g.Decription());
+                                viewWindow.DisplayMessage(g.Decription());
                         }
                     }
                     else if (staff.Contains(targetInput))   //  Player says name of staff

@@ -39,6 +39,7 @@ namespace TB_Quest_Game
         public void DisplayClear()
         {
             Console.Clear();
+            DrawHeader();
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace TB_Quest_Game
             }
 
             Console.WriteLine(_margin + "Welcome to the game \"" + HEADER_TEXT + "\"");
-            Console.WriteLine(_margin + "Type \"Play\" to continue, or \"Exit\" to quit");
+            Console.WriteLine(_margin + "Type \"Play\" to continue, or \"Quit\" to exit\n");
         }
 
         /// <summary>
@@ -202,7 +203,7 @@ namespace TB_Quest_Game
 
                 else   //  Invalid input
                 {
-                    Console.WriteLine("I didn't understand that,  try again");
+                    Console.WriteLine("I didn't understand that,  try again.\n");
                 }
             }
 
@@ -332,6 +333,42 @@ namespace TB_Quest_Game
             Console.WriteLine("");
             Console.WriteLine(_margin + message);
         }
+
+        /// <summary>
+        /// Displays the valid races in the game
+        /// </summary>
+        public void DisplayValidRaces()
+        {
+            Console.WriteLine("\tThe valid races are:\n");
+
+            foreach (Person.Races r in Enum.GetValues(typeof(Person.Races)))
+            {
+                Console.WriteLine("\t\t" + r.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Displays the valid genders in the game
+        /// </summary>
+        public void DisplayValidGenders()
+        {
+            Console.WriteLine("\tThe valid Genders are:\n");
+
+            foreach (Person.Genders g in Enum.GetValues(typeof(Person.Genders)))
+            {
+                Console.WriteLine("\t\t" + g.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Prompts the player to press a button to continue
+        /// </summary>
+        public void WaitForPlayer()
+        {
+            Console.WriteLine("\n\tPress any key to continue...");
+            Console.ReadKey();
+        }
+
         #endregion
 
 
@@ -344,7 +381,7 @@ namespace TB_Quest_Game
         /// <param name="stafflist"></param>
         /// <param name="guardlist"></param>
         /// <param name="zonemaster"></param>
-        public ConsoleView(Player player, StaffList stafflist, GuardList guardlist, ZoneMaster zonemaster)
+        public ConsoleView(ref Player player, ref StaffList stafflist, ref GuardList guardlist, ref ZoneMaster zonemaster)
         {
             Console.WindowHeight = WINDOW_HEIGHT;
             Console.WindowWidth = WINDOW_WIDTH;
