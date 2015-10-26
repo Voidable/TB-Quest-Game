@@ -369,24 +369,32 @@ namespace TB_Quest_Game
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Accepts a player object, then creates the reference.
+        /// </summary>
+        /// <param name="player"></param>
+        public void CreatePlayerReference(Player player)
+        {
+            _player = player;
+        }
+
         #endregion
 
 
         #region [ CONSTRUCTORS ]
 
         /// <summary>
-        /// Constructs the consoleView
+        /// Constructs the consoleView, Player is assumed to have not been created yet.
         /// </summary>
         /// <param name="player"></param>
         /// <param name="stafflist"></param>
         /// <param name="guardlist"></param>
         /// <param name="zonemaster"></param>
-        public ConsoleView(ref Player player, ref StaffList stafflist, ref GuardList guardlist, ref ZoneMaster zonemaster)
+        public ConsoleView(StaffList stafflist,  GuardList guardlist, ZoneMaster zonemaster)
         {
             Console.WindowHeight = WINDOW_HEIGHT;
             Console.WindowWidth = WINDOW_WIDTH;
 
-            _player = player;
             _staffList = stafflist;
             _guardList = guardlist;
             _zoneMaster = zonemaster;
